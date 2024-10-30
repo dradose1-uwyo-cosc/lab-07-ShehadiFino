@@ -1,9 +1,9 @@
-# Your Name Here
+# Shehadi Fino
 # UWYO COSC 1010
-# Submission Date
-# Lab XX
-# Lab Section: 
-# Sources, people worked with, help given to: 
+# 10-28-24
+# Lab 07
+# Lab Section: 14
+# Sources, people worked with, help given to: Ryan
 # your
 # comments
 # here
@@ -19,9 +19,20 @@
 
 factorial = 1
 
-print(f"The result of the factorial based on the given bound is {factorial}")
-
+while True:
+    upper_bound = input("Enter positive integer as an upper bound for factorial calculation: ")
+    if upper_bound.isdigit():
+        upper_bound = int(upper_bound)
+        if upper_bound > 0:
+            for i in range(1, upper_bound + 1):
+                factorial *= i
+            print(f"The result of the factorial based on the given upper bound is {factorial}")
+            break
+        else:
+            print("Please enter a positive integer")
+    
 print("*"*75)
+
 # Create a while loop that prompts a user for input of an integer values
 # Sum all inputs. When the user enters 'exit' (regardless of casing) end the loop
 # Upon ending the loop print the sum
@@ -39,9 +50,18 @@ print("*"*75)
 
 num_sum = 0 
 
+while True:
+    user_input = input("Enter an integer to add to the sum (type 'exit' to end):")
+    if user_input.lower() == "exit":
+        break
+    elif user_input.lstrip("-").isdigit():
+        num_sum += int(user_input)
+    else:
+        print("Invalid input. Please enter an integer")
 print(f"Your final sum is {num_sum}")
 
 print("*"*75)
+
 # Now you will be creating a two operand calculator
 # It will support the following operators: +,-,/,*,% 
 # So accepted input is of the form `operand operator operand` 
@@ -49,7 +69,7 @@ print("*"*75)
 # You will again need to verify that the operands are numerical values
 # For this assume only positive integers will be entered, no need look for negative numbers 
 # You will need to check the string for which operator it contains
-# Once you do, you will need to remove the operands from the string
+# Once you do, you will need to remocvcve the operands from the string
 # This can be done in multiple ways:
     # You can go through the string in a loop and create a substring of the characters until an operator is reached
         # Upon reaching the operator you will switch to another substring and add all characters following to the second new string 
@@ -59,4 +79,31 @@ print("*"*75)
 # Print the result of the equation
 # Again, loop through prompting the user for input until `exit` in any casing is input 
 
-        
+while True:
+    calc_input = input("Enter a calcaulation(example, 5 + 6). Type exit to quit:")
+    if calc_input.lower() == "exit":
+        break
+    for operator in ['+', '-', '*', '/', '%']:
+        if operator in calc_input:
+            operands = calc_input.split(operator)
+            operand1, operand2 = operands[0].rstrip(), operands[1].lstrip()
+            if operand1.isdigit() and operand2.isdigit():
+                operand1, operand2 = int(operand1), int(operand2)
+                if operator == '+':
+                    result = operand1 + operand2
+                elif operator == '-':
+                    result = operand1 - operand2
+                elif operator == '*':
+                    result = operand1 * operand2
+                elif operator == '/':
+                    result = operand1 / operand2
+                elif operator == '%':
+                    result = operand1 % operand2
+
+                print(f"The result of {operand1} {operator} {operand2} is {result}")
+            else: 
+                print("Invalid input. Enter positive integers")
+            break
+    else:
+        print("Invald format")
+    
